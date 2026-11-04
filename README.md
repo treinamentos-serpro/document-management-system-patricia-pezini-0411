@@ -56,6 +56,29 @@ INVALID_REQUEST`, `413 FILE_TOO_LARGE`, `404 DOCUMENT_NOT_FOUND` ou `500
 STORAGE_ERROR`. Documentos de outro dono e arquivos indisponíveis retornam o
 mesmo `404`. Veja os contratos completos na [especificação](docs/specs/dms-spec.md).
 
+## Frontend
+
+Com o backend em execução na porta 3000, abra outro terminal:
+
+```bash
+cd frontend
+npm ci
+npm run dev
+# Validação:
+npm test
+npm run build
+```
+
+Acesse `http://localhost:5173`, informe um usuário e clique em **Carregar
+documentos**. Selecione um arquivo e clique em **Enviar**; a lista é atualizada
+após o upload. Use **Baixar** para salvar um documento. Trocar o usuário exibe
+somente os documentos dele, usando o cabeçalho didático `X-User-Id`.
+
+O cliente em `frontend/src/services/api.js` centraliza chamadas `fetch` com
+prefixo `/api`, incluindo downloads e tratamento de erros. O proxy do Vite
+remove esse prefixo ao encaminhar as chamadas ao backend. Em produção, configure
+o servidor para encaminhar `/api` ao backend da mesma forma.
+
 ---
 
 &copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
