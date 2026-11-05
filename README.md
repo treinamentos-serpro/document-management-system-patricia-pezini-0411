@@ -1,84 +1,37 @@
-# Document Management System com GitHub Copilot
+<div align="center">
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+# 🎉 Congratulations Copilot! 🎉
 
-Hey Pezini!
+<img src="https://octodex.github.com/images/welcometocat.png" height="200px" />
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+### 🌟 You've successfully completed the exercise! 🌟
 
-Remember, it's self-paced so feel free to take a break! ☕️
+## 🚀 Share Your Success!
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/treinamentos-serpro/document-management-system-patricia-pezini-0411/issues/1)
+**Show off your new skills and inspire others!**
 
-## Backend
+<a href="https://twitter.com/intent/tweet?text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Ftreinamentos-serpro%2Fdocument-management-system-patricia-pezini-0411%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20X-1da1f2?style=for-the-badge&logo=x&logoColor=white" alt="Share on X" />
+</a>
+<a href="https://bsky.app/intent/compose?text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Ftreinamentos-serpro%2Fdocument-management-system-patricia-pezini-0411%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20Bluesky-0085ff?style=for-the-badge&logo=bluesky&logoColor=white" alt="Share on Bluesky" />
+</a>
+<a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Ftreinamentos-serpro%2Fdocument-management-system-patricia-pezini-0411%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20LinkedIn-0077b5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Share on LinkedIn" />
+</a>
 
-```bash
-cd backend
-npm ci
-npm start
-# Em outro terminal, dentro de backend:
-npm test
-```
+### 🎯 What's Next?
 
-O backend usa rotas, controllers, services e repositories em `backend/src`.
-Mantém os metadados em memória e grava os arquivos localmente com Multer
-`diskStorage`. Reiniciar o processo perde os metadados, mas não apaga os arquivos.
+**Keep the momentum going!**
 
-Configuração por ambiente:
+[![](https://img.shields.io/badge/Return%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/treinamentos-serpro/document-management-system-patricia-pezini-0411/issues/1)
+[![GitHub Skills](https://img.shields.io/badge/Explore%20GitHub%20Skills-000000?style=for-the-badge&logo=github&logoColor=white)](https://learn.github.com/skills)
 
-| Variável | Padrão |
-| --- | --- |
-| `PORT` | `3000` |
-| `STORAGE_DIR` | `backend/storage` |
-| `MAX_FILE_SIZE_BYTES` | `10485760` (10 MiB) |
+*There's no better way to learn than building things!* 🚀
 
-O diretório padrão e caminhos relativos são resolvidos a partir da raiz do
-repositório, independentemente do diretório de execução. O diretório é criado
-no primeiro upload. O limite deve ser um inteiro positivo.
-
-Todas as rotas de documentos exigem `X-User-Id` (1 a 128 caracteres após remover
-espaços externos). Essa identificação é didática, **não é autenticação**.
-
-```bash
-curl -H 'X-User-Id: usuario-demo' -F 'file=@./documento.pdf' http://localhost:3000/upload
-curl -H 'X-User-Id: usuario-demo' http://localhost:3000/documents
-curl -H 'X-User-Id: usuario-demo' -OJ http://localhost:3000/documents/UUID/download
-curl http://localhost:3000/health
-```
-
-Upload retorna `201` com `{ "document": { ... } }`; listagem retorna
-`{ "documents": [...] }`, somente do dono informado e em ordem de envio
-decrescente. Download retorna o arquivo como anexo. Os metadados públicos são
-`id`, `originalName`, `size`, `uploadedAt` e `owner`, sem caminhos internos.
-
-Erros usam `{ "error": { "code": "...", "message": "..." } }`: `400
-INVALID_REQUEST`, `413 FILE_TOO_LARGE`, `404 DOCUMENT_NOT_FOUND` ou `500
-STORAGE_ERROR`. Documentos de outro dono e arquivos indisponíveis retornam o
-mesmo `404`. Veja os contratos completos na [especificação](docs/specs/dms-spec.md).
-
-## Frontend
-
-Com o backend em execução na porta 3000, abra outro terminal:
-
-```bash
-cd frontend
-npm ci
-npm run dev
-# Validação:
-npm test
-npm run build
-```
-
-Acesse `http://localhost:5173`, informe um usuário e clique em **Carregar
-documentos**. Selecione um arquivo e clique em **Enviar**; a lista é atualizada
-após o upload. Use **Baixar** para salvar um documento. Trocar o usuário exibe
-somente os documentos dele, usando o cabeçalho didático `X-User-Id`.
-
-O cliente em `frontend/src/services/api.js` centraliza chamadas `fetch` com
-prefixo `/api`, incluindo downloads e tratamento de erros. O proxy do Vite
-remove esse prefixo ao encaminhar as chamadas ao backend. Em produção, configure
-o servidor para encaminhar `/api` ao backend da mesma forma.
+</div>
 
 ---
 
 &copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+
